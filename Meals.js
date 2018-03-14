@@ -62,7 +62,9 @@ export default class Meals extends React.Component {
             query: "buy",
             id: val
         })
-        this.props.navigation.navigate("MyOrders")
+        this.props.navigation.navigate("MyOrders",{
+            isReload: true,
+          });
         
 
     }
