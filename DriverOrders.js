@@ -19,15 +19,15 @@ export default class DriverOrders extends React.Component {
         data: []
     }
 
-    
+
 
 
     async componentWillMount() {
-        return await fetch('http://192.168.56.1:45455/api/Meals')
+        return await fetch('http://192.168.56.1:45455/api/Orders')
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson)
-                
+
                 this.setState({
                     data: responseJson
                 }, function () {
@@ -47,17 +47,22 @@ export default class DriverOrders extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text> Flat list X </Text>
+                <Text> Driver Orders </Text>
                 <FlatList
                     data={this.state.data}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <Text> {item.Name} </Text>
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                            <Text> {item.OrderId} </Text>
+                            <Text> {item.Customer.Name} </Text>
+                            <Text> {item.Status} </Text>
+                            <Button onPress={() => this.handleBuy(item.OrderId)} title="Look at map " color="red" />
+                        </View>
                     }
                 />
-                 {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
+                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" />  */}
-                 <Button onPress={() => this.props.navigation.navigate("DeliverlyMap")}  title="DeliverlyMap" color="red" /> 
+                <Button onPress={() => this.props.navigation.navigate("DeliverlyMap")} title="DeliverlyMap" color="red" />
             </View>
         );
     }
