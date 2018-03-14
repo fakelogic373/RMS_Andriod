@@ -8,6 +8,7 @@ import HomeScreen from './HomeScreen'
 import Settings from './Setting'
 import Settings2 from './Setting2'
 import LogoImage from './logo'
+import Meals from './Meals'
 
 
 
@@ -44,8 +45,8 @@ const SettingsStack = StackNavigator({
 
 export default TabNavigator(
   {
-    Home: { screen: Settings },
-    Settings: { screen: SettingsStack },
+    Meals: { screen: Meals },
+    MyOrders: { screen: SettingsStack },
     
   },
   {
