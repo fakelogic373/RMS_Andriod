@@ -3,6 +3,7 @@ import { Button, View, Text, FlatList } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
+import DB from './DB'
 
 export default class Meals extends React.Component {
 
@@ -17,6 +18,21 @@ export default class Meals extends React.Component {
 
     state = {
         data: []
+    }
+
+    buy = new DB('http://192.168.56.1:45455/api/User')
+
+
+    // componentDidMount() {
+    //     this.find()
+    // }
+
+
+    Quary = (parameters) => {
+        this.buy.find(
+            (data) => this.setState({ }),
+            parameters
+        )
     }
 
 
@@ -40,6 +56,18 @@ export default class Meals extends React.Component {
             });
     }
 
+    handleBuy = (val) => {
+        console.log("im buying: " + val)
+        this.Quary({
+            query: "buy",
+            id: val
+        })
+        this.props.navigation.navigate("MyOrders")
+        
+
+    }
+
+
 
 
 
@@ -56,7 +84,7 @@ export default class Meals extends React.Component {
                             <Text> {item.Name} </Text>
                             <Text> {item.Price} </Text>
                             <Text> {item.Category.Name} </Text>
-                            <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Buy " color="red" /> 
+                            <Button onPress={() => this.handleBuy(item.MealId)}  title="Buy " color="red" /> 
                         </View>
 
                     }

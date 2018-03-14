@@ -16,13 +16,16 @@ export default class MyOrder extends React.Component {
     };
 
     state = {
-        data: []
+        data: [],
+        num: 2
     }
 
+    
 
 
 
     async componentWillMount() {
+        this.setState ({num: 3})
         return await fetch('http://192.168.56.1:45455/api/User?query=orderitems')
             .then((response) => response.json())
             .then((responseJson) => {
