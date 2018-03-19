@@ -17,15 +17,22 @@ export default class Meals extends React.Component {
     };
 
     state = {
-        data: []
+        meals: []
     }
 
+    db = new DB('http://192.168.56.1:45455/api/Meals')
     buy = new DB('http://192.168.56.1:45455/api/User')
 
+    componentDidMount() {
+        this.find()
+    }
 
-    // componentDidMount() {
-    //     this.find()
-    // }
+    find = (parameters) => {
+        this.db.find(
+            (data) => this.setState({ meals: data }),
+            parameters
+        )
+    }
 
 
     Quary = (parameters) => {
@@ -38,47 +45,14 @@ export default class Meals extends React.Component {
 
 
 
-    async componentWillMount() {
-        return await fetch('http://192.168.56.1:45455/api/Meals')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson)
-
-                this.setState({
-                    data: responseJson
-                }, function () {
-
-                });
-
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-
     handleBuy = (val) => {
         console.log("im buying: " + val)
         this.Quary({
             query: "buy",
             id: val
         })
-        this.props.navigation.navigate("MyOrders",{
-            isReload: true,
-          });
-
-
+        this.props.navigation.navigate("MyOrders",{isReload: true, });
     }
-
-    // handleBuy = (val) => {
-    //     console.log("im buying: " + val)
-
-    //     this.buy.buy(
-    //         val,
-    //         console.log("hola")
-    //     )
-
-
-    // }
 
 
 
@@ -90,7 +64,7 @@ export default class Meals extends React.Component {
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text> Meals </Text>
                 <FlatList
-                    data={this.state.data}
+                    data={this.state.meals}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
                         <View style={{ flex: 1, flexDirection: 'row' }}>

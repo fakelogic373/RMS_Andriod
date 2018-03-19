@@ -23,7 +23,7 @@ export default class CookerOrders extends React.Component {
     db = new DB('http://192.168.56.1:45455/api/Orders')
 
     componentDidMount() {
-        this.find()
+        this.find({query: "getPaid"})
     }
 
      find = async (parameters) => {
