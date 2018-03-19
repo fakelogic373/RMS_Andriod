@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default class CookerOrders extends React.Component {
+export default class CookerOrdersIncoming extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -24,6 +24,124 @@ export default class CookerOrders extends React.Component {
 
     componentDidMount() {
         this.find({query: "getPaid"})
+    }
+
+     find = async (parameters) => {
+        await this.db.find(
+            (data) => this.setState({ orders: data }),
+            parameters
+        )
+    }
+
+
+
+
+
+    render() {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text> Incoming orders </Text>
+                <FlatList
+                    data={this.state.orders}
+                    keyExtractor={(x, i) => i}
+                    renderItem={({ item }) =>
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                            <Text> {item.OrderId} </Text>
+                            <Text> {item.Customer.Name} </Text>
+                            <Text> {item.OrderType} </Text>
+                            <Text> {item.OrderDate} </Text>
+                            <Text> {item.Status} </Text>
+
+                            <Button onPress={() => console.log("hola")} title="Start " color="red" />
+                        </View>
+                    }
+                />
+                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
+                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
+                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
+            </View>
+        );
+    }
+}
+
+export  class CookerOrdersInprogress extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: 'CookerOrders',
+            headerRight: (
+                <LogoImage />
+            ),
+        };
+    };
+
+    state = {
+        orders: []
+    }
+
+    db = new DB('http://192.168.56.1:45455/api/Orders')
+
+    componentDidMount() {
+        this.find({query: "Cooking"})
+    }
+
+     find = async (parameters) => {
+        await this.db.find(
+            (data) => this.setState({ orders: data }),
+            parameters
+        )
+    }
+
+
+
+
+
+    render() {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text> Incoming orders </Text>
+                <FlatList
+                    data={this.state.orders}
+                    keyExtractor={(x, i) => i}
+                    renderItem={({ item }) =>
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                            <Text> {item.OrderId} </Text>
+                            <Text> {item.Customer.Name} </Text>
+                            <Text> {item.OrderType} </Text>
+                            <Text> {item.OrderDate} </Text>
+                            <Text> {item.Status} </Text>
+
+                            <Button onPress={() => console.log("hola")} title="Start " color="red" />
+                        </View>
+                    }
+                />
+                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
+                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
+                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
+            </View>
+        );
+    }
+}
+
+export  class CookerOrdersDone extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: 'CookerOrders',
+            headerRight: (
+                <LogoImage />
+            ),
+        };
+    };
+
+    state = {
+        orders: []
+    }
+
+    db = new DB('http://192.168.56.1:45455/api/Orders')
+
+    componentDidMount() {
+        this.find({query: "Done"})
     }
 
      find = async (parameters) => {

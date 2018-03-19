@@ -47,9 +47,9 @@ const SettingsStack = StackNavigator({
 
 export default TabNavigator(
   {
-    Incoming: { screen: CookerOrders },
-    Inprogress: { screen: MyOrders },
-    Done: { screen: MyOrders },
+    Incoming: { screen: CookerOrders.CookerOrdersIncoming },
+    Inprogress: { screen: CookerOrders.CookerOrdersInprogress },
+    Done: { screen: CookerOrders.CookerOrdersDone  },
     
   },
   {
