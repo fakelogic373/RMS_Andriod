@@ -16,10 +16,10 @@ export default class DB {
             //     headers.Authorization = "Bearer " + TOKEN;
             // }
             var response = await fetch(this.url + urlParameters, {
-                headers: headers
+
             });
             var data = await response.json();
-            console.log(data);
+            console.log("data fetched or find");
             action(data)
         }
         catch (e) {

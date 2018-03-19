@@ -10,6 +10,7 @@ import Settings2 from './Setting2'
 import LogoImage from './logo'
 import Meals from './Meals'
 import MyOrders from './MyOrder'
+import CookerOrders from './CookerOrders'
 
 
 
@@ -46,7 +47,7 @@ const SettingsStack = StackNavigator({
 
 export default TabNavigator(
   {
-    Incoming: { screen: Meals },
+    Incoming: { screen: CookerOrders },
     Inprogress: { screen: MyOrders },
     Done: { screen: MyOrders },
     

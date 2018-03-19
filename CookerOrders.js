@@ -1,4 +1,5 @@
 import React from 'react';
+import DB from './DB'
 import { Button, View, Text, FlatList } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
@@ -16,28 +17,20 @@ export default class CookerOrders extends React.Component {
     };
 
     state = {
-        data: []
+        orders: []
     }
 
-    
+    db = new DB('http://192.168.56.1:45455/api/Orders')
 
+    componentDidMount() {
+        this.find()
+    }
 
-    async componentWillMount() {
-        return await fetch('http://192.168.56.1:45455/api/Meals')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson)
-                
-                this.setState({
-                    data: responseJson
-                }, function () {
-
-                });
-
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+     find = async (parameters) => {
+        await this.db.find(
+            (data) => this.setState({ orders: data }),
+            parameters
+        )
     }
 
 
@@ -47,15 +40,23 @@ export default class CookerOrders extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text> Flat list X </Text>
+                <Text> Incoming orders </Text>
                 <FlatList
-                    data={this.state.data}
+                    data={this.state.orders}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <Text> {item.Name} </Text>
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                            <Text> {item.OrderId} </Text>
+                            <Text> {item.Customer.Name} </Text>
+                            <Text> {item.OrderType} </Text>
+                            <Text> {item.OrderDate} </Text>
+                            <Text> {item.Status} </Text>
+
+                            <Button onPress={() => console.log("hola")} title="Start " color="red" />
+                        </View>
                     }
                 />
-                 {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
+                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
             </View>
