@@ -30,7 +30,7 @@ export default class Meals extends React.Component {
 
     Quary = (parameters) => {
         this.buy.find(
-            (data) => this.setState({ }),
+            (data) => this.setState({}),
             parameters
         )
     }
@@ -65,9 +65,20 @@ export default class Meals extends React.Component {
         this.props.navigation.navigate("MyOrders",{
             isReload: true,
           });
-        
+
 
     }
+
+    // handleBuy = (val) => {
+    //     console.log("im buying: " + val)
+
+    //     this.buy.buy(
+    //         val,
+    //         console.log("hola")
+    //     )
+
+
+    // }
 
 
 
@@ -82,11 +93,11 @@ export default class Meals extends React.Component {
                     data={this.state.data}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
                             <Text> {item.Name} </Text>
                             <Text> {item.Price} </Text>
                             <Text> {item.Category.Name} </Text>
-                            <Button onPress={() => this.handleBuy(item.MealId)}  title="Buy " color="red" /> 
+                            <Button onPress={() => this.handleBuy(item.MealId)} title="Buy " color="red" />
                         </View>
 
                     }

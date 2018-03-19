@@ -11,9 +11,11 @@ import LogoImage from './logo'
 import TabNav from './tabnav'
 import Login from './login'
 import CustomerTab from './CustomerTab'
+import CookerTab from './CookerTab'
 import CookerOrders from './CookerOrders'
 import DriverOrders from './DriverOrders'
 import DeliverlyMap from './DeliveryMap'
+
 
 
 const RootStack = StackNavigator(
@@ -25,7 +27,7 @@ const RootStack = StackNavigator(
       screen: CustomerTab,
     },
     CookerOrders: {
-      screen: CookerOrders,
+      screen: CookerTab,
     },
     DriverOrders: {
       screen: DriverOrders,

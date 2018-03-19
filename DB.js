@@ -1,9 +1,7 @@
-
 export default class DB {
     constructor(url) {
         this.url = url;
     }
-
     find = async(action,parameters) => {
         let urlParameters = '';
         if (parameters) {
@@ -12,8 +10,8 @@ export default class DB {
         }
         console.log(urlParameters)
         try {
-            //const TOKEN = sessionStorage.getItem('token');
-            var headers = {};
+            // const TOKEN = sessionStorage.getItem('token');
+            // var headers = {};
             // if (TOKEN) {
             //     headers.Authorization = "Bearer " + TOKEN;
             // }
@@ -106,10 +104,22 @@ export default class DB {
         }
     }
 
-    addToken = (request) => {
-        request = request || {}
-        request.headers = request.headers || {}
-        request.headers.Authorization =  'Bearer ' + sessionStorage.getItem('token')
-        return request
+    // addToken = (request) => {
+    //     request = request || {}
+    //     request.headers = request.headers || {}
+    //     request.headers.Authorization =  'Bearer ' + sessionStorage.getItem('token')
+    //     return request
+    // }
+    
+    buy = async (id, action) => {
+        try {
+            var response = await fetch(this.url + '/api/User?query=buy&id=' + id );
+            var data = await response.json();
+            console.log(data);
+            action(data);
+        }
+        catch (e) {
+            console.log("Error", e);
+        }
     }
 }
