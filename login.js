@@ -22,23 +22,23 @@ export default class Login extends React.Component {
     
 
 
-    async componentWillMount() {
-        return await fetch('http://192.168.56.1:45455/api/Meals')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson)
+    // async componentWillMount() {
+    //     return await fetch('http://192.168.56.1:45455/api/Meals')
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+    //             console.log(responseJson)
                 
-                this.setState({
-                    data: responseJson
-                }, function () {
+    //             this.setState({
+    //                 data: responseJson
+    //             }, function () {
 
-                });
+    //             });
 
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }
 
 
 

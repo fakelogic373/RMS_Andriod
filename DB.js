@@ -29,7 +29,7 @@ export default class DB {
 
     findAll = async (action) => {
         try {
-            var response = await fetch(this.url, this.addToken());
+            var response = await fetch(this.url);
             var data = await response.json();
             console.log(data);
             action(data);
@@ -41,7 +41,7 @@ export default class DB {
 
     findOne = async (id, action) => {
         try {
-            var response = await fetch(this.url + '/' + id , this.addToken());
+            var response = await fetch(this.url + '/' + id );
             var data = await response.json();
             console.log(data);
             action(data);
@@ -54,13 +54,7 @@ export default class DB {
     create = async (json) => {
         try {
             var response = await fetch(this.url,
-                this.addToken({
-                    method: 'POST',
-                    body: JSON.stringify(json),
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                })
+                
             )
             var data = await response.json();
             console.log(data);
@@ -71,10 +65,7 @@ export default class DB {
 
     destroy = async (id, action) => {
         try {
-            var response = await fetch(this.url + '/' + id,
-                this.addToken({
-                    method: 'DELETE'
-                })
+            var response = await fetch(this.url + '/' + id
             );
             var data = await response.json();
             console.log(data);
@@ -87,14 +78,7 @@ export default class DB {
 
     update = async (id, json, action) => {
         try {
-            var response = await fetch(this.url + '/' + id,
-                this.addToken({
-                    method: 'PUT',
-                    body: JSON.stringify(json),
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                })
+            var response = await fetch(this.url + '/' + id
             )
             if (action) {
                 action()
@@ -122,4 +106,20 @@ export default class DB {
             console.log("Error", e);
         }
     }
+
+
+    checkout = async (action) => {
+        const response = await fetch(this.url +'/api/User?query=checkout')
+        const data = await response.json()
+        action(data)
+    }
+
+    // setCooking = async (id,action) => {
+    //     const response = await fetch(this.url +'/api/Orders?query=setCooking&id=' + id)
+    //     const data = await response.json()
+    //     action(data)
+    // }
+
+
+
 }

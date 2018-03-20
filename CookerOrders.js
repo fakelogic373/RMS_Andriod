@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export  class CookerOrdersPaid extends React.Component {
+export class CookerOrdersPaid extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -23,14 +23,31 @@ export  class CookerOrdersPaid extends React.Component {
     db = new DB('http://192.168.56.1:45455/api/Orders')
 
     componentDidMount() {
-        this.find({query: "getPaid"})
+        this.find({ query: "getPaid" })
     }
 
-     find = async (parameters) => {
+    Quary = (parameters) => {
+        this.db.find(
+            (data) => this.setState({}),
+            parameters
+        )
+    }
+
+    find = async (parameters) => {
         await this.db.find(
             (data) => this.setState({ orders: data }),
             parameters
         )
+    }
+
+
+
+    handleCooking = (val) => {
+        console.log("val = "  + val)
+        this.find({
+            query: "setCooking",
+            id: val
+        })
     }
 
 
@@ -52,7 +69,7 @@ export  class CookerOrdersPaid extends React.Component {
                             <Text> {item.OrderDate} </Text>
                             <Text> {item.Status} </Text>
 
-                            <Button onPress={() => console.log("hola")} title="Start " color="red" />
+                            <Button onPress={() => this.handleCooking(item.OrderId)} title="Start Cooking " color="red" />
                         </View>
                     }
                 />
@@ -64,7 +81,7 @@ export  class CookerOrdersPaid extends React.Component {
     }
 }
 
-export  class CookerOrdersInprogress extends React.Component {
+export class CookerOrdersInprogress extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -82,15 +99,24 @@ export  class CookerOrdersInprogress extends React.Component {
     db = new DB('http://192.168.56.1:45455/api/Orders')
 
     componentDidMount() {
-        this.find({query: "getCooking"})
+        this.find({ query: "getCooking" })
     }
 
-     find = async (parameters) => {
+    find = async (parameters) => {
         await this.db.find(
             (data) => this.setState({ orders: data }),
             parameters
         )
     }
+
+    handleDone = (val) => {
+        console.log("val = "  + val)
+        this.find({
+            query: "setDone",
+            id: val
+        })
+    }
+
 
 
 
@@ -111,7 +137,7 @@ export  class CookerOrdersInprogress extends React.Component {
                             <Text> {item.OrderDate} </Text>
                             <Text> {item.Status} </Text>
 
-                            <Button onPress={() => console.log("hola")} title="Start " color="red" />
+                            <Button onPress={() => this.handleDone(item.OrderId)} title="Done Cooking " color="red" />
                         </View>
                     }
                 />
@@ -123,7 +149,7 @@ export  class CookerOrdersInprogress extends React.Component {
     }
 }
 
-export  class CookerOrdersDone extends React.Component {
+export class CookerOrdersDone extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -141,10 +167,10 @@ export  class CookerOrdersDone extends React.Component {
     db = new DB('http://192.168.56.1:45455/api/Orders')
 
     componentDidMount() {
-        this.find({query: "getDone"})
+        this.find({ query: "getDone" })
     }
 
-     find = async (parameters) => {
+    find = async (parameters) => {
         await this.db.find(
             (data) => this.setState({ orders: data }),
             parameters
