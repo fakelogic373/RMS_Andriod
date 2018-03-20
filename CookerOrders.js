@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default class CookerOrdersIncoming extends React.Component {
+export  class CookerOrdersPaid extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -82,7 +82,7 @@ export  class CookerOrdersInprogress extends React.Component {
     db = new DB('http://192.168.56.1:45455/api/Orders')
 
     componentDidMount() {
-        this.find({query: "Cooking"})
+        this.find({query: "getCooking"})
     }
 
      find = async (parameters) => {
@@ -141,7 +141,7 @@ export  class CookerOrdersDone extends React.Component {
     db = new DB('http://192.168.56.1:45455/api/Orders')
 
     componentDidMount() {
-        this.find({query: "Done"})
+        this.find({query: "getDone"})
     }
 
      find = async (parameters) => {
