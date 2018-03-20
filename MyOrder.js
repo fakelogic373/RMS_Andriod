@@ -3,6 +3,7 @@ import { Button, View, Text, FlatList } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
+import DB from './DB'
 
 export default class MyOrder extends React.Component {
 
@@ -18,6 +19,15 @@ export default class MyOrder extends React.Component {
     state = {
         data: [],
         num: 2
+    }
+
+    buy = new DB('http://192.168.56.1:45455/api/User')
+
+    Quary = (parameters) => {
+        this.buy.find(
+            (data) => this.setState({}),
+            parameters
+        )
     }
 
 
@@ -63,6 +73,15 @@ export default class MyOrder extends React.Component {
         }
     }
 
+    handleCheckout = () =>{
+        console.log("im checking out " )
+        this.Quary({
+            query: "checkout"
+
+        })
+  
+    }
+
 
 
 
@@ -80,7 +99,7 @@ export default class MyOrder extends React.Component {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text> My current order</Text>
-                <Text> number : {this.state.num}</Text>
+                {/* <Text> number : {this.state.num}</Text> */}
                 <FlatList
                     data={this.state.data}
                     keyExtractor={(x, i) => i}
@@ -95,7 +114,7 @@ export default class MyOrder extends React.Component {
                     }
                 />
 
-                <Button onPress={() => this.props.navigation.navigate("Orders")} title="Checkout " color="red" />
+                <Button onPress={() => this.handleCheckout()} title="Checkout " color="red" />
                 <Button onPress={() => this.handleReload()} title="reload " color="red" />
                 {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 

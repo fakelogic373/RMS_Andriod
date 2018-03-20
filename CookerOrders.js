@@ -196,7 +196,7 @@ export class CookerOrdersDone extends React.Component {
                             <Text> {item.OrderDate} </Text>
                             <Text> {item.Status} </Text>
 
-                            <Button onPress={() => console.log("hola")} title="Start " color="red" />
+                           
                         </View>
                     }
                 />
