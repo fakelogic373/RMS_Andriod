@@ -22,7 +22,7 @@ export default class DB {
                 headers: headers
             });
             var data = await response.json();
-            console.log(data);
+            //console.log(data);
             action(data)
         }
         catch (e) {
