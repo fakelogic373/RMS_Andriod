@@ -16,6 +16,7 @@ import CookerOrders from './CookerOrders'
 import DriverOrders from './DriverOrders'
 import DeliverlyMap from './DeliveryMap'
 import LoginPage from './loginpage'
+import RegisterPage from './registerpage'
 
 
 
@@ -41,6 +42,9 @@ const RootStack = StackNavigator(
     },
     Login: {
       screen: LoginPage
+    },
+    Register: {
+      screen: RegisterPage
     }
   },
   {

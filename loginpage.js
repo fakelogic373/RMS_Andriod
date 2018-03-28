@@ -43,6 +43,26 @@ export default class StudentReg extends Component {
         }
     }
 
+    redicrection = async () => {
+        const value = AsyncStorage.getItem('userName');
+        if (value !== null) {
+            // We have data!!
+            console.log(value._65);
+
+        }
+
+
+        let rAdmin = /^[a-z A-Z 0-9 . _ ]+@+admin+\.+[a-z A-Z]/
+
+        console.log("this user is" + TOKEN)
+
+
+        if (rAdmin.test(user)) {
+            this.props.navigation.navigate("Home")
+        }
+
+    }
+
     handleLogin = () => {
         this.login(
             this.state,
@@ -58,11 +78,29 @@ export default class StudentReg extends Component {
                     //console.log(AsyncStorage.getItem('token'))
                     // Alert.alert("userName =" + AsyncStorage.getItem('token'))
 
-                    AsyncStorage.getItem('token', (err, item) => console.log(item));
-                    AsyncStorage.getItem('userName', (err, item) => console.log(item));
+                    //AsyncStorage.getItem('token', (err, item) => console.log(item));
+                    //AsyncStorage.getItem('userName', (err, item) => console.log(item));
 
-                    this.props.navigation.navigate("CustomerTab")
+                    let rexAdmin = /^[a-z A-Z 0-9 . _ ]+@+admin+\.+[a-z A-Z]/
+                    let rexChef = /^[a-z A-Z 0-9 . _ ]+@+chef+\.+[a-z A-Z]/
+                    let rexDriver = /^[a-z A-Z 0-9 . _ ]+@+driver+\.+[a-z A-Z]/
 
+                    console.log("this user is" + data.userName)
+
+
+                    if (rexAdmin.test(data.userName)) {
+                        this.props.navigation.navigate("Home")
+                    }
+
+                    else if (rexChef.test(data.userName)) {
+                        this.props.navigation.navigate("CookerOrders")
+                    }
+                    else if (rexDriver.test(data.userName)) {
+                        this.props.navigation.navigate("DriverOrders")
+                    }
+                    else {
+                        this.props.navigation.navigate("CustomerTab")
+                    }
                 }
                 else {
                     Alert.alert("wrong user/password input ")
@@ -141,6 +179,15 @@ export default class StudentReg extends Component {
                             <TouchableOpacity style={{ alignContent: 'center', justifyContent: 'center' }} onPress={this.handleLogin}>
                                 <View style={styles.btnContainer}>
                                     <Text style={{ textAlign: 'center', color: 'white', fontSize: 30, margin: 10 }}>Login</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                        </View>
+
+                        <View style={{ alignItems: 'center', marginTop: 20 }}>
+                            <TouchableOpacity style={{ alignContent: 'center', justifyContent: 'center' }} onPress={() => this.props.navigation.navigate("Register")}>
+                                <View style={styles.btnContainer}>
+                                    <Text style={{ textAlign: 'center', color: 'white', fontSize: 30, margin: 10 }}>Register</Text>
                                 </View>
                             </TouchableOpacity>
 
