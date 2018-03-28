@@ -9,7 +9,7 @@ import Settings from './Setting'
 import Settings2 from './Setting2'
 import LogoImage from './logo'
 import TabNav from './tabnav'
-import Login from './login'
+// import Login from './login'
 import CustomerTab from './CustomerTab'
 import CookerTab from './CookerTab'
 import CookerOrders from './CookerOrders'
@@ -22,8 +22,8 @@ import RegisterPage from './registerpage'
 
 const RootStack = StackNavigator(
   {
-    Home: {
-      screen: Login,
+    HomeScreen: {
+      screen: HomeScreen,
     },
     CustomerTab: {
       screen: CustomerTab,
@@ -48,11 +48,19 @@ const RootStack = StackNavigator(
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'HomeScreen',
   }
 );
 
 export default class App extends React.Component {
+
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
+  }
+
   render() {
     return <RootStack />;
   }

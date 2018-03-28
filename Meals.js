@@ -1,9 +1,12 @@
 import React from 'react';
-import { Button, View, Text, FlatList, AsyncStorage } from 'react-native';
+// import { Button, View, Text, FlatList } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
 import DB from './DB'
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
+import { Image } from 'react-native';
+// import * as azizmd from 'react-native-material-design';
 
 export default class Meals extends React.Component {
 
@@ -34,16 +37,12 @@ export default class Meals extends React.Component {
         )
     }
 
-
     Quary = (parameters) => {
         this.buy.find(
             (data) => this.setState({}),
             parameters
         )
     }
-
-
-
 
     handleBuy = (val) => {
         console.log("im buying: " + val)
@@ -54,42 +53,55 @@ export default class Meals extends React.Component {
         this.props.navigation.navigate("MyOrders",{isReload: true, });
     }
 
-    handleLogout = () =>{
-        AsyncStorage.removeItem('token')
-        AsyncStorage.removeItem('userName')
-        this.props.navigation.goBack()
-    }
-
-    
-
-
-
-
-
-
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Button onPress={() => this.handleLogout()} title="logout " color="red" />
-                <Text> Meals </Text>
-                <FlatList
-                    data={this.state.meals}
-                    keyExtractor={(x, i) => i}
-                    renderItem={({ item }) =>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <Text> {item.Name} </Text>
-                            <Text> {item.Price} </Text>
-                            <Text> {item.Category.Name} </Text>
-                            <Button onPress={() => this.handleBuy(item.MealId)} title="Buy " color="red" />
-                        </View>
+            <Container>
+                <Content>
+                    <Card style={{ flex: 0 }}>
+                        <CardItem>
+                            <Left>
+                                <Thumbnail source={{ uri: 'https://amedia.britannica.com/85/5785-004-83380705.jpg' }} />
+                                <Body>
+                                    <Text>NativeBase</Text>
+                                    <Text note>April 15, 2016</Text>
+                                </Body>
+                            </Left>
+                        </CardItem>
+                        <CardItem>
+                            <Body>
+                                <Image source={{ uri: 'https://i1.wp.com/voiceofpeopletoday.com/wp-content/uploads/2017/09/Tens-of-thousands-mark-3-years-since-rebel-takeover-of-Yemen-capital.jpg?fit=1500%2C843&ssl=1' }} style={{ height: 200, width: 200, flex: 1 }} />
+                                <Text>
+                                //Your text here
+                                </Text>
+                            </Body>
+                        </CardItem>
+                        <CardItem>
+                            <Left>
+                                <Button transparent textStyle={{ color: '#87838B' }}>
+                                    <Icon name="logo-github" />
+                                    <Text>1,926 stars</Text>
+                                </Button>
+                            </Left>
+                        </CardItem>
+                    </Card>
+                </Content>
+            </Container>
+            // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            //     <Text> Meals </Text>
+            //     <FlatList
+            //         data={this.state.meals}
+            //         keyExtractor={(x, i) => i}
+            //         renderItem={({ item }) =>
+            //             <View style={{ flex: 1, flexDirection: 'row' }}>
+            //                 <Text> {item.Name} </Text>
+            //                 <Text> {item.Price} </Text>
+            //                 <Text> {item.Category.Name} </Text>
+            //                 <Button rounded info onPress={() => this.handleBuy(item.MealId)}><Text>Buy</Text></Button>
+            //             </View>
 
-                    }
-                />
-                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
-                 
-            </View>
+            //         }
+            //     />
+            // </View>
         );
     }
 }
