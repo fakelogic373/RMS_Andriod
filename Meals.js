@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD
 // import { Button, View, Text, FlatList } from 'react-native';
+=======
+import { Button, View, Text, FlatList, AsyncStorage } from 'react-native';
+>>>>>>> 1ccbeae6c735d51ba682c26875b4d349d51e55d4
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -53,6 +57,7 @@ export default class Meals extends React.Component {
         this.props.navigation.navigate("MyOrders",{isReload: true, });
     }
 
+<<<<<<< HEAD
     render() {
         return (
             <Container>
@@ -102,6 +107,44 @@ export default class Meals extends React.Component {
             //         }
             //     />
             // </View>
+=======
+    handleLogout = () =>{
+        AsyncStorage.removeItem('token')
+        AsyncStorage.removeItem('userName')
+        this.props.navigation.goBack()
+    }
+
+    
+
+
+
+
+
+
+    render() {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Button onPress={() => this.handleLogout()} title="logout " color="red" />
+                <Text> Meals </Text>
+                <FlatList
+                    data={this.state.meals}
+                    keyExtractor={(x, i) => i}
+                    renderItem={({ item }) =>
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                            <Text> {item.Name} </Text>
+                            <Text> {item.Price} </Text>
+                            <Text> {item.Category.Name} </Text>
+                            <Button onPress={() => this.handleBuy(item.MealId)} title="Buy " color="red" />
+                        </View>
+
+                    }
+                />
+                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
+                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
+                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
+                 
+            </View>
+>>>>>>> 1ccbeae6c735d51ba682c26875b4d349d51e55d4
         );
     }
 }

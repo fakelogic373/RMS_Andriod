@@ -15,6 +15,7 @@ import CookerTab from './CookerTab'
 import CookerOrders from './CookerOrders'
 import DriverOrders from './DriverOrders'
 import DeliverlyMap from './DeliveryMap'
+import LoginPage from './loginpage'
 
 
 
@@ -38,9 +39,16 @@ const RootStack = StackNavigator(
     Orders: {
       screen: TabNav,
     },
+    Login: {
+      screen: LoginPage
+    }
   },
   {
+<<<<<<< HEAD
     initialRouteName: 'HomeScreen',
+=======
+    initialRouteName: 'Login',
+>>>>>>> 1ccbeae6c735d51ba682c26875b4d349d51e55d4
   }
 );
 
