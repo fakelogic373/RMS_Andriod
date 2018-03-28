@@ -14,17 +14,16 @@ export default class DB {
         console.log(urlParameters)
         try {
             //const TOKEN = AsyncStorage.getItem('token');
-            
-            try {
-                const value = await AsyncStorage.getItem('token');
-                if (value !== null){
-                  // We have data!!
-                  console.log(value);
-                  const TOKEN = value
-                }
-              } catch (error) {
-                // Error retrieving data
-              }
+
+
+
+            const value = await AsyncStorage.getItem('token');
+            if (value !== null) {
+                // We have data!!
+                console.log(value);
+                
+            }
+            const TOKEN = value
 
             var headers = {};
             if (TOKEN) {
@@ -39,7 +38,7 @@ export default class DB {
         }
         catch (e) {
             console.log("Error is ", e)
-           
+
         }
 
 

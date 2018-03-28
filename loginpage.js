@@ -61,7 +61,7 @@ export default class StudentReg extends Component {
                     AsyncStorage.getItem('token', (err, item) => console.log(item));
                     AsyncStorage.getItem('userName', (err, item) => console.log(item));
 
-                    //this.props.navigation.navigate("CustomerTab")
+                    this.props.navigation.navigate("CustomerTab")
 
                 }
                 else {

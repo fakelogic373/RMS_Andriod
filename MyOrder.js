@@ -77,11 +77,12 @@ export default class MyOrder extends React.Component {
 
     }
 
-    handleLogout = () =>{
+    handleLogout = () => {
         // AsyncStorage.removeItem('token')
         // AsyncStorage.removeItem('userName')
         // this.props.navigation.goBack()
-        console.log(AsyncStorage.getItem('userName'))
+        AsyncStorage.getItem('token', (err, item) => console.log(item));
+        AsyncStorage.getItem('userName', (err, item) => console.log(item));
     }
 
 
