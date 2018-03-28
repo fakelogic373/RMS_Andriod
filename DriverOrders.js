@@ -21,7 +21,7 @@ export default class DriverOrders extends React.Component {
         orders: []
     }
 
-    db = new DB('http://192.168.56.1:45455/api/Orders')
+    db = new DB('http://192.168.56.1:45457/api/Orders')
 
     componentDidMount() {
         this.find({ query: "getDone" })

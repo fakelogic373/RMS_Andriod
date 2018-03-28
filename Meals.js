@@ -20,8 +20,8 @@ export default class Meals extends React.Component {
         meals: []
     }
 
-    db = new DB('http://192.168.56.1:45455/api/Meals')
-    buy = new DB('http://192.168.56.1:45455/api/User')
+    db = new DB('http://192.168.56.1:45457/api/Meals')
+    buy = new DB('http://192.168.56.1:45457/api/User')
 
     componentDidMount() {
         this.find()

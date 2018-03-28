@@ -21,7 +21,7 @@ export default class MyOrder extends React.Component {
         num: 2
     }
 
-    buy = new DB('http://192.168.56.1:45455/api/User')
+    buy = new DB('http://192.168.56.1:45457/api/User')
 
     Quary = (parameters) => {
         this.buy.find(
@@ -36,7 +36,7 @@ export default class MyOrder extends React.Component {
 
     async componentWillMount() {
 
-        return await fetch('http://192.168.56.1:45455/api/User?query=orderitems')
+        return await fetch('http://192.168.56.1:45457/api/User?query=orderitems')
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson)
@@ -55,7 +55,7 @@ export default class MyOrder extends React.Component {
 
     handleReload = async (val) => {
         if(val){
-            return await fetch('http://192.168.56.1:45455/api/User?query=orderitems')
+            return await fetch('http://192.168.56.1:45457/api/User?query=orderitems')
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson)

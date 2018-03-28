@@ -23,7 +23,7 @@ export default class DeliverlyMap extends React.Component {
 
 
     async componentWillMount() {
-        return await fetch('http://192.168.56.1:45455/api/Meals')
+        return await fetch('http://192.168.56.1:45457/api/Meals')
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson)
