@@ -6,12 +6,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen'
 import Meals from './Meals'
 import MyOrders from './MyOrder'
-
+import MyOrdersHistory from './MyOrderHistory'
 
 export default TabNavigator(
   {
     Meals: { screen: Meals },
     MyOrders: { screen: MyOrders },
+    MyOrdersHistory: { screen: MyOrdersHistory },
     
   },
   {
