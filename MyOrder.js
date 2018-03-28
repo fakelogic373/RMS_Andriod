@@ -16,83 +16,161 @@ export default class MyOrder extends React.Component {
         };
     };
 
+
+    // state = {
+    //     data: [],
+    //     num: 2
+    // }
+
+    // buy = new DB('http://192.168.56.1:45457/api/User')
+
+    // Quary = (parameters) => {
+    //     this.buy.find(
+    //         (data) => this.setState({}),
+    //         parameters
+    //     )
+    // }
+
+
+
+
+
+    // async componentWillMount() {
+
+    //     return await fetch('http://192.168.56.1:45457/api/User?query=orderitems')
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+    //             console.log(responseJson)
+
+    //             this.setState({
+    //                 data: responseJson
+    //             }, function () {
+
+    //             });
+
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }
+
+    // handleReload = async (val) => {
+    //     if(val){
+    //         return await fetch('http://192.168.56.1:45457/api/User?query=orderitems')
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+    //             console.log(responseJson)
+
+    //             this.setState({
+    //                 data: responseJson
+    //             }, function () {
+
+    //             });
+
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    //     }
+    // }
+
+    // handleCheckout = () =>{
+    //     console.log("im checking out " )
+    //     this.Quary({
+    //         query: "checkout"
+
+    //     })
+  
+    // }
+
     state = {
-        data: [],
-        num: 2
+        order: null,
+        OrderItems: [],
+        data: []
     }
 
-    buy = new DB('http://192.168.56.1:45457/api/User')
+    db = new DB('http://192.168.56.1:45457/api/Orders')
+    dbUser = new DB('http://192.168.56.1:45457/api/User')
+
+    componentDidMount() {
+        this.findCurrentUser()
+        this.findOrderItem()
+    }
+
+    // find = async (parameters) => {
+    //     await this.db.findOne(
+    //         2,
+    //         (data) => this.setState({ order: data })
+    //     )
+    // }
+
+    // findCurrentUser = async (parameters) => {
+    //     await this.dbUser.find(
+    //         (data) => this.db.findOne(
+    //             data.CustomerId,
+    //             data => this.setState({ order: data })
+    //         ),
+    //         {
+    //             query: "customer"
+    //         }
+    //     )
+    // }
+
+    findCurrentUser = async (parameters) => {
+        await this.dbUser.find(
+            (data) => this.setState({ order: data }),
+            {
+                query: "order"
+            }
+        )
+    }
 
     Quary = (parameters) => {
-        this.buy.find(
+        this.dbUser.find(
             (data) => this.setState({}),
             parameters
         )
     }
 
 
-
-
-
-    async componentWillMount() {
-
-        return await fetch('http://192.168.56.1:45457/api/User?query=orderitems')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson)
-
-                this.setState({
-                    data: responseJson
-                }, function () {
-
-                });
-
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    findOrderItem = async (parameters) => {
+        await this.dbUser.find(
+            (data) => this.setState({ data: data }),
+            {
+                query: "orderitems"
+            }
+        )
     }
 
-    handleReload = async (val) => {
-        if(val){
-            return await fetch('http://192.168.56.1:45457/api/User?query=orderitems')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson)
-
-                this.setState({
-                    data: responseJson
-                }, function () {
-
-                });
-
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        }
-    }
-
-    handleCheckout = () =>{
-        console.log("im checking out " )
+    handleCheckout = () => {
+        console.log("im checking out ")
         this.Quary({
             query: "checkout"
 
         })
-  
+
     }
 
+    handleEmptyCart = () => {
+        console.log("im emypying cart ")
+        this.Quary({
+            query: "emptycart"
 
+        })
+
+    }
 
 
 
     render() {
 
-        const { params } = this.props.navigation.state;
-        const isReload = params ? params.isReload : null;
-        const otherParam = params ? params.otherParam : null;
+        // const { params } = this.props.navigation.state;
+        // const isReload = params ? params.isReload : null;
+        // const otherParam = params ? params.otherParam : null;
 
-        this.handleReload(isReload)
+        // this.handleReload(isReload)
+
+        console.log(this.state.data)
 
         
 
@@ -115,7 +193,7 @@ export default class MyOrder extends React.Component {
                 />
 
                 <Button onPress={() => this.handleCheckout()} title="Checkout " color="red" />
-                <Button onPress={() => this.handleReload()} title="reload " color="red" />
+                {/* <Button onPress={() => this.handleReload()} title="reload " color="red" /> */}
                 {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
