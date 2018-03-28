@@ -7,7 +7,7 @@ import HomeScreen from './HomeScreen'
 import LogoImage from './logo'
 import Meals from './Meals'
 import MyOrders from './MyOrder'
-
+import MyOrdersHistory from './MyOrderHistory'
 
 
 
@@ -16,6 +16,7 @@ export default TabNavigator(
   {
     Meals: { screen: Meals },
     MyOrders: { screen: MyOrders },
+    MyOrdersHistory: { screen: MyOrdersHistory },
     
   },
   {
