@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text, FlatList } from 'react-native';
+import { Button, View, Text, FlatList, AsyncStorage } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -54,6 +54,12 @@ export default class Meals extends React.Component {
         this.props.navigation.navigate("MyOrders",{isReload: true, });
     }
 
+    handleLogout = () =>{
+        AsyncStorage.removeItem('token')
+        AsyncStorage.removeItem('userName')
+        this.props.navigation.goBack()
+    }
+
     
 
 
@@ -64,6 +70,7 @@ export default class Meals extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Button onPress={() => this.handleLogout()} title="logout " color="red" />
                 <Text> Meals </Text>
                 <FlatList
                     data={this.state.meals}
@@ -81,6 +88,7 @@ export default class Meals extends React.Component {
                 {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
+                 
             </View>
         );
     }

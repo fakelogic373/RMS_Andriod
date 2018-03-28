@@ -32,6 +32,10 @@ export default class StudentReg extends Component {
             )
             console.log("login", response)
             const data = await response.json();
+
+            await AsyncStorage.setItem('token', data.access_token);
+            await AsyncStorage.setItem('userName', data.userName);
+
             action(data);
         }
         catch (e) {
@@ -50,11 +54,14 @@ export default class StudentReg extends Component {
                     // console.log(sessionStorage.getItem('userName'))
                     // alert("welcome " + sessionStorage.getItem('userName'))
 
-                    AsyncStorage.setItem('token', data.access_token);
-                    AsyncStorage.setItem('userName', data.userName);
+
                     //console.log(AsyncStorage.getItem('token'))
-                    Alert.alert("userName =" + data.userName)
-                    this.props.navigation.navigate("CustomerTab")
+                    // Alert.alert("userName =" + AsyncStorage.getItem('token'))
+
+                    AsyncStorage.getItem('token', (err, item) => console.log(item));
+                    AsyncStorage.getItem('userName', (err, item) => console.log(item));
+
+                    //this.props.navigation.navigate("CustomerTab")
 
                 }
                 else {

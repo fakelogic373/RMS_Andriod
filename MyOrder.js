@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text, FlatList } from 'react-native';
+import { Button, View, Text, FlatList, AsyncStorage, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -77,6 +77,13 @@ export default class MyOrder extends React.Component {
 
     }
 
+    handleLogout = () =>{
+        // AsyncStorage.removeItem('token')
+        // AsyncStorage.removeItem('userName')
+        // this.props.navigation.goBack()
+        console.log(AsyncStorage.getItem('userName'))
+    }
+
 
     render() {
 
@@ -99,6 +106,7 @@ export default class MyOrder extends React.Component {
                 />
 
                 <Button onPress={() => this.handleCheckout()} title="Checkout " color="red" />
+                <Button onPress={() => this.handleLogout()} title="logout " color="red" />
                 {/* <Button onPress={() => this.handleReload()} title="reload " color="red" /> */}
                 {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
                  <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 

@@ -13,7 +13,19 @@ export default class DB {
         }
         console.log(urlParameters)
         try {
-            const TOKEN = AsyncStorage.getItem('token');
+            //const TOKEN = AsyncStorage.getItem('token');
+            
+            try {
+                const value = await AsyncStorage.getItem('token');
+                if (value !== null){
+                  // We have data!!
+                  console.log(value);
+                  const TOKEN = value
+                }
+              } catch (error) {
+                // Error retrieving data
+              }
+
             var headers = {};
             if (TOKEN) {
                 headers.Authorization = "Bearer " + TOKEN;
