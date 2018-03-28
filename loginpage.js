@@ -89,7 +89,7 @@ export default class StudentReg extends Component {
 
 
                     if (rexAdmin.test(data.userName)) {
-                        this.props.navigation.navigate("Home")
+                        this.props.navigation.navigate("HomeScreen")
                     }
 
                     else if (rexChef.test(data.userName)) {
