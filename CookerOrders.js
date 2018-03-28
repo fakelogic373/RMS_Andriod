@@ -9,7 +9,7 @@ export class CookerOrdersPaid extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: 'CookerOrders',
+            headerTitle: 'Chef Orders',
             headerRight: (
                 <LogoImage />
             ),
@@ -85,7 +85,7 @@ export class CookerOrdersInprogress extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: 'CookerOrders',
+            headerTitle: 'Chef Orders',
             headerRight: (
                 <LogoImage />
             ),
