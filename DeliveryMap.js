@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text, FlatList } from 'react-native';
+import { Button, View, Text, FlatList, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -10,7 +10,10 @@ export default class DeliverlyMap extends React.Component {
         return {
             headerTitle: 'DeliverlyMap',
             headerRight: (
-                <LogoImage />
+                <Image
+                    source={require('./images/Headers/delivery.png')}
+                    style={{ width: 50, height: 50 }}
+                />
             ),
         };
     };
@@ -19,15 +22,12 @@ export default class DeliverlyMap extends React.Component {
         data: []
     }
 
-    
-
-
     async componentWillMount() {
         return await fetch('http://192.168.56.1:45457/api/Meals')
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson)
-                
+
                 this.setState({
                     data: responseJson
                 }, function () {
@@ -40,10 +40,6 @@ export default class DeliverlyMap extends React.Component {
             });
     }
 
-
-
-
-
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -55,9 +51,6 @@ export default class DeliverlyMap extends React.Component {
                         <Text> {item.Name} </Text>
                     }
                 />
-                 {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
             </View>
         );
     }

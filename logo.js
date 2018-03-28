@@ -6,7 +6,7 @@ export default class LogoImage extends Component {
     return (
       <View>
         <Image
-          source={require('./home.png')}
+          source={require('./images/Headers/home.png')}
           style={{width: 50, height: 50}}
         />
         {/* <Image

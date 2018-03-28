@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, TextInput, View, Button, StyleSheet, TouchableOpacity, Text, Image, KeyboardAvoidingView, AsyncStorage } from 'react-native';
+import { Container, Content, Form, Item, Input, Label } from 'native-base';
 
 
 
@@ -7,7 +8,13 @@ import { Alert, TextInput, View, Button, StyleSheet, TouchableOpacity, Text, Ima
 export default class StudentReg extends Component {
 
     static navigationOptions = {
-        title: 'third',
+        title: 'Welcome To RMS',
+        headerRight: (
+            <Image
+                source={require('./images/Headers/login.png')}
+                style={{ width: 50, height: 50, paddingRight: 10 }}
+            />
+        ),
     };
 
 
@@ -116,99 +123,57 @@ export default class StudentReg extends Component {
     render() {
         return (
             <View style={styles.container}>
-
-
                 <KeyboardAvoidingView
                     style={styles.container}
                     behavior="padding"
                 >
-
-
-
                     <View style={{ alignItems: 'center', marginBottom: 5 }} >
-                        <Text style={{ color: 'white', fontSize: 40, color: 'white' }}>login</Text>
+                        <Text style={{ fontSize: 40, color: 'black', paddingBottom: 65 }}>login</Text>
                     </View>
-
-
-
                     <View>
                         {/* the entire form box */}
-
-
                         <View style={{ flexDirection: 'row' }}>
-
-                            <View style={{ backgroundColor: '#706fd3', borderRadius: 10, margin: 5, width: 190 }}>
-                                <TextInput
-                                    underlineColorAndroid={'transparent'}
-                                    style={[styles.textIn, this.state.flagPass && styles.textInNotValid]}
-                                    placeholder="Email"
-                                    selectTextOnFocus={true}
-
-                                    onFocus={this.ShowOnFocus}
-                                    onChangeText={(Username) => this.setState({ Username })}
-                                    value={this.state.Username}
-                                />
-                            </View>
-
+                                <Content>
+                                    <Form>
+                                        <Item floatingLabel>
+                                            <Label style={{ color: '#ff0000' }}>Email</Label>
+                                            <Input
+                                            style={[styles.textIn, this.state.flagPass && styles.textInNotValid]}
+                                            selectTextOnFocus={true}
+                                            onFocus={this.ShowOnFocus}
+                                            onChangeText={(Username) => this.setState({ Username })}
+                                            value={this.state.Username}
+                                            />
+                                        </Item>
+                                        <Item floatingLabel>
+                                            <Label style={{ color: '#ff0000' }}>Password</Label>
+                                            <Input
+                                            style={[styles.textIn, this.state.flagPass && styles.textInNotValid]}
+                                            onChangeText={(Password) => this.setState({ Password })}
+                                            value={this.state.Password}
+                                            selectTextOnFocus={true}
+                                            />
+                                        </Item>
+                                    </Form>
+                                </Content>
                         </View>
-
-
-                        <View style={{ flexDirection: 'row' }}>
-
-
-
-
-                            <View style={{ backgroundColor: '#706fd3', borderRadius: 10, margin: 5, width: 190 }}>
-                                <TextInput
-                                    underlineColorAndroid={'transparent'}
-                                    style={[styles.textIn, this.state.flagPass && styles.textInNotValid]}
-                                    placeholder="Password"
-
-                                    onChangeText={(Password) => this.setState({ Password })}
-                                    value={this.state.Password}
-                                    selectTextOnFocus={true}
-                                />
-
-                            </View>
-
-
-                        </View>
-
-
                         <View style={{ alignItems: 'center', marginTop: 20 }}>
                             <TouchableOpacity style={{ alignContent: 'center', justifyContent: 'center' }} onPress={this.handleLogin}>
                                 <View style={styles.btnContainer}>
                                     <Text style={{ textAlign: 'center', color: 'white', fontSize: 30, margin: 10 }}>Login</Text>
                                 </View>
                             </TouchableOpacity>
-
                         </View>
-
                         <View style={{ alignItems: 'center', marginTop: 20 }}>
                             <TouchableOpacity style={{ alignContent: 'center', justifyContent: 'center' }} onPress={() => this.props.navigation.navigate("Register")}>
                                 <View style={styles.btnContainer}>
                                     <Text style={{ textAlign: 'center', color: 'white', fontSize: 30, margin: 10 }}>Register</Text>
                                 </View>
                             </TouchableOpacity>
-
                         </View>
-
                     </View>
-
-
-
-
-
                 </KeyboardAvoidingView>
-
-
-
-
-
-
             </View>
-
-
         );
     }
 }
@@ -217,18 +182,25 @@ export default class StudentReg extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#474787',
+        backgroundColor: '#e8e8e8',
         //alignItems: 'center',
         justifyContent: 'center',
     },
     textIn: {
-        color: 'black', fontSize: 20, margin: 10
+        color: 'black',
+        fontSize: 20,
+        margin: 10
     },
     textInNotValid: {
-        color: 'red', fontSize: 20, margin: 10
+        color: 'red',
+        fontSize: 20,
+        margin: 10
     },
 
     btnContainer: {
-        backgroundColor: "#8584f9", borderRadius: 50, justifyContent: 'center', width: 250
+        backgroundColor: "#999999",
+        borderRadius: 50,
+        justifyContent: 'center',
+        width: 250
     }
 });

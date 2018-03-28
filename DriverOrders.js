@@ -1,6 +1,6 @@
 import React from 'react';
 import DB from './DB'
-import { Button, View, Text, FlatList } from 'react-native';
+import { Button, View, Text, FlatList, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -12,7 +12,10 @@ export default class DriverOrders extends React.Component {
         return {
             headerTitle: 'Driver orders',
             headerRight: (
-                <LogoImage />
+                <Image
+                    source={require('./images/Headers/delivery.png')}
+                    style={{ width: 50, height: 50 }}
+                />
             ),
         };
     };

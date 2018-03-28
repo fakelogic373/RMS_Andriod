@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text, FlatList, AsyncStorage, Alert } from 'react-native';
+import { Button, View, Text, FlatList, AsyncStorage, Alert, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -11,7 +11,10 @@ export default class MyOrder extends React.Component {
         return {
             headerTitle: 'My current order',
             headerRight: (
-                <LogoImage />
+                <Image
+                    source={require('./images/Headers/chef.png')}
+                    style={{ width: 50, height: 50 }}
+                />
             ),
         };
     };
