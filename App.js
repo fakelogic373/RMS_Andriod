@@ -48,7 +48,7 @@ const RootStack = StackNavigator(
     }
   },
   {
-    initialRouteName: 'HomeScreen',
+    initialRouteName: 'Login',
   }
 );
 
