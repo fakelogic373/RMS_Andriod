@@ -44,11 +44,7 @@ const RootStack = StackNavigator(
     }
   },
   {
-<<<<<<< HEAD
     initialRouteName: 'HomeScreen',
-=======
-    initialRouteName: 'Login',
->>>>>>> 1ccbeae6c735d51ba682c26875b4d349d51e55d4
   }
 );
 
