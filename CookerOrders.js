@@ -90,7 +90,10 @@ export class CookerOrdersInprogress extends React.Component {
         return {
             headerTitle: 'Chef Orders',
             headerRight: (
-                <LogoImage />
+                <Image
+                    source={require('./images/Headers/chef.png')}
+                    style={{ width: 50, height: 50 }}
+                />
             ),
         };
     };
@@ -156,9 +159,12 @@ export class CookerOrdersDone extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: 'CookerOrders',
+            headerTitle: 'Chef Orders',
             headerRight: (
-                <LogoImage />
+                <Image
+                    source={require('./images/Headers/chef.png')}
+                    style={{ width: 50, height: 50 }}
+                />
             ),
         };
     };

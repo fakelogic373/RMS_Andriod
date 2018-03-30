@@ -1,15 +1,17 @@
 import React from 'react';
-import { Button, View, Text, FlatList, AsyncStorage, Alert, Image } from 'react-native';
+import { View, FlatList, AsyncStorage, Alert, Image } from 'react-native';
+import { List, ListItem, Left, Body, Right, Thumbnail, Text, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
 import DB from './DB'
+import ImagesJS from './Images'
 
 export default class MyOrder extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: 'My current order',
+            headerTitle: 'Your Current Crder',
             headerRight: (
                 <Image
                     source={require('./images/Headers/chef.png')}
@@ -93,28 +95,47 @@ export default class MyOrder extends React.Component {
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text> My current order</Text>
-                {/* <Text> number : {this.state.num}</Text> */}
                 <FlatList
+                    style={{ width: '100%' }}
                     data={this.state.OrderItems}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <Text> {item.Meal.Name} </Text>
-                            <Text> {item.Quantity} </Text>
-                            <Text> {item.Status} </Text>
-
-                        </View>
-
+                        // <View style={{ flex: 1, flexDirection: 'row' }}>
+                        //     <Text>  </Text>
+                        //     <Text>  </Text>
+                        //     <Text>  </Text>
+                            
+                        // </View>
+                        <List>
+                            <ListItem avatar>
+                                <Left>
+                                    {item.Meal.Category.Name
+                                        ?
+                                        <Thumbnail source={ImagesJS[item.Meal.Category.Name.split(" ")[0]]} />
+                                        :
+                                        <Thumbnail source={require('./images/default-thumbnail.jpg')} />
+                                    }
+                                </Left>
+                                <Body>
+                                    <Text>{item.Quantity} {item.Meal.Name}</Text>
+                                    <Text note>{item.Meal.Description}</Text>
+                                </Body>
+                                <Right>
+                                    <Text note>{item.Status}</Text>
+                                </Right>
+                            </ListItem>
+                        </List>
                     }
                 />
+                <View style={{ alignItems: 'center', paddingBottom: 10 }}>
+                    <Button rounded success onPress={() => this.handleCheckout()}>
+                        <Text>Checkout</Text>
+                    </Button>
+                    {/* <Button bordered danger onPress={() => this.handleLogout()}>
+                        <Text>logout</Text>
+                    </Button> */}
+                </View>
 
-                <Button onPress={() => this.handleCheckout()} title="Checkout " color="red" />
-                <Button onPress={() => this.handleLogout()} title="logout " color="red" />
-                {/* <Button onPress={() => this.handleReload()} title="reload " color="red" /> */}
-                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
             </View>
         );
     }

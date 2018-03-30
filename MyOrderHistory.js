@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, View, Text, FlatList, AsyncStorage, Alert } from 'react-native';
+import { View, FlatList, AsyncStorage, Alert, Image } from 'react-native';
+import { List, ListItem, Left, Body, Text, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -9,9 +10,12 @@ export default class MyOrderHistory extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: 'My current order',
+            headerTitle: 'Your Orders History',
             headerRight: (
-                <LogoImage />
+                <Image
+                    source={require('./images/Headers/chef.png')}
+                    style={{ width: 50, height: 50 }}
+                />
             ),
         };
     };
@@ -75,10 +79,6 @@ export default class MyOrderHistory extends React.Component {
         )
         
     }
-
-    
-
-
 
     handleMinPrice = (event) => {
         this.setState({ MinPrice: event.target.value })
@@ -156,36 +156,45 @@ export default class MyOrderHistory extends React.Component {
         }
     }
 
-
-
-
+    handleLogout = () => {
+        AsyncStorage.getItem('token', (err, item) => console.log(item));
+        AsyncStorage.getItem('userName', (err, item) => console.log(item));
+    }
 
     render() {
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text> My Order History </Text>
-                {/* <Text> number : {this.state.num}</Text> */}
                 <FlatList
                     data={this.state.orders}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <Text> {item.OrderId} </Text>
-                            <Text> {item.Status} </Text>
-                            <Text> {item.Customer.Name} </Text>
+                        // <View style={{ flex: 1, flexDirection: 'row' }}>
+                        //     <Text> {item.OrderId} </Text>
+                        //     <Text> {item.Status} </Text>
+                        //     <Text> {item.Customer.Name} </Text>
+                        // </View>
 
-                        </View>
-
+                        <List>
+                            <ListItem>
+                                <Left>
+                                     {item.OrderId}
+                                </Left>
+                                <Body>
+                                    <Text>{item.Status}</Text>
+                                    <Text note>{item.Customer.Name}</Text>
+                                </Body>
+                            </ListItem>
+                        </List>
                     }
                 />
+                <View style={{ alignItems: 'center', paddingBottom: 10 }}>
+                    <Button rounded danger onPress={() => this.handleLogout()}>
+                        <Text>logout</Text>
+                    </Button>
+                </View>
 
-                <Button onPress={() => this.handleCheckout()} title="Checkout " color="red" />
-                <Button onPress={() => this.handleLogout()} title="logout " color="red" />
-                {/* <Button onPress={() => this.handleReload()} title="reload " color="red" /> */}
-                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
             </View>
         );
     }

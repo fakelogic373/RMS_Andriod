@@ -128,8 +128,9 @@ export default class StudentReg extends Component {
                     behavior="padding"
                 >
                     <View style={{ alignItems: 'center', marginBottom: 5 }} >
-                        <Text style={{ fontSize: 40, color: 'black', paddingBottom: 65 }}>login</Text>
+                        <Text style={{ fontSize: 40, color: 'black', paddingBottom: 65 }}>Login</Text>
                     </View>
+
                     <View>
                         {/* the entire form box */}
                         <View style={{ flexDirection: 'row' }}>
@@ -164,6 +165,7 @@ export default class StudentReg extends Component {
                                 </View>
                             </TouchableOpacity>
                         </View>
+
                         <View style={{ alignItems: 'center', marginTop: 20 }}>
                             <TouchableOpacity style={{ alignContent: 'center', justifyContent: 'center' }} onPress={() => this.props.navigation.navigate("Register")}>
                                 <View style={styles.btnContainer}>
@@ -187,20 +189,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textIn: {
-        color: 'black',
-        fontSize: 20,
-        margin: 10
+        color: 'black', fontSize: 20, margin: 10
     },
     textInNotValid: {
-        color: 'red',
-        fontSize: 20,
-        margin: 10
+        color: 'red', fontSize: 20, margin: 10
     },
 
     btnContainer: {
-        backgroundColor: "#999999",
-        borderRadius: 50,
-        justifyContent: 'center',
-        width: 250
+        backgroundColor: "#999999", borderRadius: 50, justifyContent: 'center', width: 250
     }
 });
