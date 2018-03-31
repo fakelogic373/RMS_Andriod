@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Alert, TextInput, View, Button, StyleSheet, TouchableOpacity, Text, Image, KeyboardAvoidingView, AsyncStorage } from 'react-native';
 import { Container, Content, Form, Item, Input, Label } from 'native-base';
 
-
-
-
 export default class RegisterPage extends Component {
 
     static navigationOptions = {
@@ -17,14 +14,11 @@ export default class RegisterPage extends Component {
         ),
     };
 
-
     state = {
         Email: '',
         Password: '',
         ConfirmPassword: ''
     }
-
-
 
     register = async (json, action) => {
         try {
@@ -45,10 +39,7 @@ export default class RegisterPage extends Component {
         }
     }
 
-
-
     handleRegister = () => {
-
         if (this.state.Password != this.state.ConfirmPassword) {
             alert("the password doesnt match")
         }
@@ -57,13 +48,8 @@ export default class RegisterPage extends Component {
                 this.state,
                 () => this.props.navigation.navigate("Login")
             )
-
         }
-
     }
-
-
-
 
     render() {
         return (
@@ -129,7 +115,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#e8e8e8',
-        //alignItems: 'center',
         justifyContent: 'center',
     },
     textIn: {

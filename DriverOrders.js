@@ -1,9 +1,9 @@
 import React from 'react';
 import DB from './DB'
-import { Button, View, Text, FlatList, Image } from 'react-native';
+import { View, FlatList, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
-import Icon from 'react-native-vector-icons/Ionicons';
+import { List, ListItem, Left, Body, Right, Thumbnail, Text, Button, Icon } from 'native-base';
 
 
 export default class DriverOrders extends React.Component {
@@ -46,34 +46,36 @@ export default class DriverOrders extends React.Component {
     }
 
 
-
-
-
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text> Incoming orders </Text>
                 <FlatList
+                    style={{ width: '100%' }}
                     data={this.state.orders}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <Text> {item.OrderId} </Text>
-                            <Text> {item.Customer.Name} </Text>
-                            <Text> {item.OrderType} </Text>
-                            <Text> {item.OrderDate} </Text>
-                            <Text> {item.Status} </Text>
 
-                            
-
-                            <Button onPress={() => this.handleDeliverd(item.OrderId)} title="Set Deliverd " color="red" />
-                            <Button onPress={() => console.log("hola")} title="View map" color="red" />
-                        </View>
+                        <List>
+                            <ListItem icon>
+                                <Left>
+                                    <Icon name="ios-car" />
+                                </Left>
+                                <Body style={{ flexDirection: 'row', paddingTop: 12 }}>
+                                    <Text>{item.OrderId}</Text>
+                                    <Text note>{item.Customer.Name}</Text>
+                                </Body>
+                                <Right>
+                                    <Button transparent warning small onPress={() => this.props.navigation.navigate("MapView")}>
+                                        <Text>View Map</Text>
+                                    </Button>
+                                    <Button rounded success small onPress={() => this.handleDeliverd(item.OrderId)}>
+                                        <Text>Deliverd</Text>
+                                    </Button>
+                                </Right>
+                            </ListItem>
+                        </List>
                     }
                 />
-                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
             </View>
         );
     }

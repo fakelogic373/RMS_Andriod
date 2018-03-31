@@ -10,31 +10,28 @@ import * as CookerOrders from './CookerOrders'
 
 export default TabNavigator(
   {
-    Incoming: { screen: CookerOrders.CookerOrdersPaid },
-    Inprogress: { screen: CookerOrders.CookerOrdersInprogress },
+    Orders: { screen: CookerOrders.CookerOrdersPaid },
+    Preparing: { screen: CookerOrders.CookerOrdersInprogress },
     Done: { screen: CookerOrders.CookerOrdersDone  },
-    
   },
   {
-
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
       },
-
     }),
 
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
       style: {
-        backgroundColor: 'lightblue',
-        
+        backgroundColor: '#4050b5',
       },
-      activeTintColor: 'red',
-      inactiveTintColor: 'blue',
+      activeTintColor: 'white',
+      inactiveTintColor: '#b3c7f9',
       labelStyle: {
         fontSize:24,
+        paddingBottom: 8
       }
     },
     animationEnabled: true,

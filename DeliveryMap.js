@@ -33,7 +33,6 @@ export default class DeliverlyMap extends React.Component {
                 }, function () {
 
                 });
-
             })
             .catch((error) => {
                 console.error(error);

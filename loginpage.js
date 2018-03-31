@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Alert, TextInput, View, Button, StyleSheet, TouchableOpacity, Text, Image, KeyboardAvoidingView, AsyncStorage } from 'react-native';
 import { Container, Content, Form, Item, Input, Label } from 'native-base';
 
-
-
-
 export default class StudentReg extends Component {
 
     static navigationOptions = {
@@ -17,13 +14,10 @@ export default class StudentReg extends Component {
         ),
     };
 
-
     state = {
         Username: 'admin@admin.com',
         Password: 'Password1!'
     }
-
-
 
     login = async (json, action) => {
         try {
@@ -55,19 +49,15 @@ export default class StudentReg extends Component {
         if (value !== null) {
             // We have data!!
             console.log(value._65);
-
         }
-
 
         let rAdmin = /^[a-z A-Z 0-9 . _ ]+@+admin+\.+[a-z A-Z]/
 
         console.log("this user is" + TOKEN)
 
-
         if (rAdmin.test(user)) {
             this.props.navigation.navigate("Home")
         }
-
     }
 
     handleLogin = () => {
@@ -75,25 +65,11 @@ export default class StudentReg extends Component {
             this.state,
             (data) => {
                 if (data.access_token) {
-                    // sessionStorage.setItem('token', data.access_token)
-                    // sessionStorage.setItem('userName', data.userName)
-                    // console.log(sessionStorage.getItem('token'))
-                    // console.log(sessionStorage.getItem('userName'))
-                    // alert("welcome " + sessionStorage.getItem('userName'))
-
-
-                    //console.log(AsyncStorage.getItem('token'))
-                    // Alert.alert("userName =" + AsyncStorage.getItem('token'))
-
-                    //AsyncStorage.getItem('token', (err, item) => console.log(item));
-                    //AsyncStorage.getItem('userName', (err, item) => console.log(item));
-
                     let rexAdmin = /^[a-z A-Z 0-9 . _ ]+@+admin+\.+[a-z A-Z]/
                     let rexChef = /^[a-z A-Z 0-9 . _ ]+@+chef+\.+[a-z A-Z]/
                     let rexDriver = /^[a-z A-Z 0-9 . _ ]+@+driver+\.+[a-z A-Z]/
 
                     console.log("this user is" + data.userName)
-
 
                     if (rexAdmin.test(data.userName)) {
                         this.props.navigation.navigate("HomeScreen")
@@ -117,9 +93,6 @@ export default class StudentReg extends Component {
         )
     }
 
-
-
-
     render() {
         return (
             <View style={styles.container}>
@@ -134,29 +107,29 @@ export default class StudentReg extends Component {
                     <View>
                         {/* the entire form box */}
                         <View style={{ flexDirection: 'row' }}>
-                                <Content>
-                                    <Form>
-                                        <Item floatingLabel>
-                                            <Label style={{ color: '#ff0000' }}>Email</Label>
-                                            <Input
+                            <Content>
+                                <Form>
+                                    <Item floatingLabel>
+                                        <Label style={{ color: '#ff0000', fontWeight: 'bold' }}>Email</Label>
+                                        <Input
                                             style={[styles.textIn, this.state.flagPass && styles.textInNotValid]}
                                             selectTextOnFocus={true}
                                             onFocus={this.ShowOnFocus}
                                             onChangeText={(Username) => this.setState({ Username })}
                                             value={this.state.Username}
-                                            />
-                                        </Item>
-                                        <Item floatingLabel>
-                                            <Label style={{ color: '#ff0000' }}>Password</Label>
-                                            <Input
+                                        />
+                                    </Item>
+                                    <Item floatingLabel>
+                                        <Label style={{ color: '#ff0000', fontWeight: 'bold' }}>Password</Label>
+                                        <Input
                                             style={[styles.textIn, this.state.flagPass && styles.textInNotValid]}
                                             onChangeText={(Password) => this.setState({ Password })}
                                             value={this.state.Password}
                                             selectTextOnFocus={true}
-                                            />
-                                        </Item>
-                                    </Form>
-                                </Content>
+                                        />
+                                    </Item>
+                                </Form>
+                            </Content>
                         </View>
                         <View style={{ alignItems: 'center', marginTop: 20 }}>
                             <TouchableOpacity style={{ alignContent: 'center', justifyContent: 'center' }} onPress={this.handleLogin}>
@@ -189,13 +162,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textIn: {
-        color: 'black', fontSize: 20, margin: 10
+        color: 'black',
+        fontSize: 20,
+        margin: 10
     },
     textInNotValid: {
-        color: 'red', fontSize: 20, margin: 10
+        color: 'red',
+        fontSize: 20,
+        margin: 10
     },
-
     btnContainer: {
-        backgroundColor: "#999999", borderRadius: 50, justifyContent: 'center', width: 250
+        backgroundColor: "#999999",
+        borderRadius: 50,
+        justifyContent: 'center',
+        width: 250
     }
 });

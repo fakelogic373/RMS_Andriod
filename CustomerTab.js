@@ -13,23 +13,18 @@ export default DrawerNavigator(
     Meals: { screen: Meals },
     MyOrders: { screen: MyOrders },
     MyOrdersHistory: { screen: MyOrdersHistory },
-    
   },
   {
-
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
       },
-
     }),
-
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
       style: {
         backgroundColor: 'lightblue',
-        
       },
       activeTintColor: 'red',
       inactiveTintColor: 'blue',

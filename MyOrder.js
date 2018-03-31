@@ -36,8 +36,6 @@ export default class MyOrder extends React.Component {
         console.log(this.state.OrderItems)
     }
 
-
-
     findCurrentUser = async (parameters) => {
         await this.dbUser.find(
             (data) => this.setState({ order: data }),
@@ -68,31 +66,23 @@ export default class MyOrder extends React.Component {
         console.log("im checking out ")
         this.Quary({
             query: "checkout"
-
         })
-
     }
 
     handleEmptyCart = () => {
         console.log("im emypying cart ")
         this.Quary({
             query: "emptycart"
-
         })
-
     }
 
     handleLogout = () => {
-        // AsyncStorage.removeItem('token')
-        // AsyncStorage.removeItem('userName')
-        // this.props.navigation.goBack()
         AsyncStorage.getItem('token', (err, item) => console.log(item));
         AsyncStorage.getItem('userName', (err, item) => console.log(item));
     }
 
 
     render() {
-
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <FlatList
@@ -100,12 +90,6 @@ export default class MyOrder extends React.Component {
                     data={this.state.OrderItems}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        // <View style={{ flex: 1, flexDirection: 'row' }}>
-                        //     <Text>  </Text>
-                        //     <Text>  </Text>
-                        //     <Text>  </Text>
-                            
-                        // </View>
                         <List>
                             <ListItem avatar>
                                 <Left>
@@ -131,11 +115,7 @@ export default class MyOrder extends React.Component {
                     <Button rounded success onPress={() => this.handleCheckout()}>
                         <Text>Checkout</Text>
                     </Button>
-                    {/* <Button bordered danger onPress={() => this.handleLogout()}>
-                        <Text>logout</Text>
-                    </Button> */}
                 </View>
-
             </View>
         );
     }

@@ -1,9 +1,48 @@
 import React from 'react';
 import DB from './DB'
-import { Button, View, Text, FlatList, Image } from 'react-native';
+import { View, FlatList, Image } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Text, Body, Button, Right, Left, Icon, List, ListItem, Switch } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
-import Icon from 'react-native-vector-icons/Ionicons';
+import CountMeals from './CountMeals'
+
+
+class Greeting extends React.Component {
+    state = {
+        orderItems: []
+    }
+
+    OrderItemDB = new DB('http://192.168.56.1:45457/api/OrderItems')
+
+    componentDidMount() {
+        this.find({  OrderId : this.props.Id})
+    }
+
+
+    find = async (parameters) => {
+        await this.OrderItemDB.find(
+            (data) => this.setState({ orderItems: data }),
+            parameters
+        )
+    }
+
+    render() {
+        return (
+            <View>
+                {
+                    this.state.orderItems.map((item) =>
+                        item.Meal
+                            ?
+                            <Text> {item.Meal.Name}</Text>
+                            :
+                            <Text> </Text>
+                    )
+                }
+            </View>
+        );
+    }
+}
+
 
 export class CookerOrdersPaid extends React.Component {
 
@@ -25,6 +64,7 @@ export class CookerOrdersPaid extends React.Component {
 
     db = new DB('http://192.168.56.1:45457/api/Orders')
 
+
     componentDidMount() {
         this.find({ query: "getPaid" })
     }
@@ -43,42 +83,49 @@ export class CookerOrdersPaid extends React.Component {
         )
     }
 
-
-
     handleCooking = (val) => {
-        console.log("val = "  + val)
+        console.log("val = " + val)
         this.find({
             query: "setCooking",
             id: val
         })
     }
 
-
-
-
-
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text> Incoming orders </Text>
                 <FlatList
+                    style={{ width: '100%' }}
                     data={this.state.orders}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <Text> {item.OrderId} </Text>
-                            <Text> {item.Customer.Name} </Text>
-                            <Text> {item.OrderType} </Text>
-                            <Text> {item.OrderDate} </Text>
-                            <Text> {item.Status} </Text>
-
-                            <Button onPress={() => this.handleCooking(item.OrderId)} title="Start Cooking " color="red" />
-                        </View>
+                        <Card>
+                            <CardItem header>
+                                <Text>{item.OrderId}, {item.Customer.Name}</Text>
+                            </CardItem>
+                            <CardItem>
+                                <Body>
+                                    <Greeting Id={item.OrderId} />
+                                    <Text>
+                                        {item.OrderType}
+                                    </Text>
+                                    <Text>
+                                        {item.OrderDate}
+                                    </Text>
+                                </Body>
+                            </CardItem>
+                            <CardItem footer>
+                                <Text>{item.Status}</Text>
+                                <Right>
+                                    <Button iconRight light onPress={() => this.handleCooking(item.OrderId)}>
+                                        <Text>Start Cooking</Text>
+                                        <Icon name='arrow-forward' />
+                                    </Button>
+                                </Right>
+                            </CardItem>
+                        </Card>
                     }
                 />
-                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
             </View>
         );
     }
@@ -106,6 +153,7 @@ export class CookerOrdersInprogress extends React.Component {
 
     componentDidMount() {
         this.find({ query: "getCooking" })
+        console.log(this.state.orders)
     }
 
     find = async (parameters) => {
@@ -116,40 +164,42 @@ export class CookerOrdersInprogress extends React.Component {
     }
 
     handleDone = (val) => {
-        console.log("val = "  + val)
+        console.log("val = " + val)
         this.find({
             query: "setDone",
             id: val
         })
     }
 
-
-
-
-
-
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text> Incoming orders </Text>
                 <FlatList
+                    style={{ width: '100%' }}
                     data={this.state.orders}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <Text> {item.OrderId} </Text>
-                            <Text> {item.Customer.Name} </Text>
-                            <Text> {item.OrderType} </Text>
-                            <Text> {item.OrderDate} </Text>
-                            <Text> {item.Status} </Text>
 
-                            <Button onPress={() => this.handleDone(item.OrderId)} title="Done Cooking " color="red" />
-                        </View>
+                        <List>
+                            <ListItem icon>
+                                <Left>
+                                    <Icon name="checkmark" />
+                                </Left>
+                                <Body>
+                                    <Text>{item.OrderId}</Text>
+                                    <Text note>{item.OrderType}</Text>
+                                </Body>
+                                <Right>
+                                    <Button small success iconRight light onPress={() => this.handleDone(item.OrderId)}>
+                                        <Text>Ready !</Text>
+                                        <Icon name='arrow-forward' />
+                                    </Button>
+                                </Right>
+                            </ListItem>
+                        </List>
                     }
                 />
-                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
+
             </View>
         );
     }
@@ -186,32 +236,28 @@ export class CookerOrdersDone extends React.Component {
         )
     }
 
-
-
-
-
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text> Incoming orders </Text>
                 <FlatList
+                    style={{ width: '100%' }}
                     data={this.state.orders}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <Text> {item.OrderId} </Text>
-                            <Text> {item.Customer.Name} </Text>
-                            <Text> {item.OrderType} </Text>
-                            <Text> {item.OrderDate} </Text>
-                            <Text> {item.Status} </Text>
 
-                           
-                        </View>
+                        <List>
+                            <ListItem icon>
+                                <Left>
+                                    <Icon name="checkmark" />
+                                </Left>
+                                <Body>
+                                    <Text>{item.OrderId}</Text>
+                                    <Text note>{item.Customer.Name}, {item.OrderType}</Text>
+                                </Body>
+                            </ListItem>
+                        </List>
                     }
                 />
-                {/* <Button onPress={() => this.props.navigation.navigate("CustomerTab")}  title="Customer " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Cooker " color="red" /> 
-                 <Button onPress={() => this.props.navigation.navigate("Orders")}  title="Driver" color="red" />  */}
             </View>
         );
     }

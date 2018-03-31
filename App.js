@@ -12,8 +12,7 @@ import DriverOrders from './DriverOrders'
 import DeliverlyMap from './DeliveryMap'
 import LoginPage from './loginpage'
 import RegisterPage from './registerpage'
-
-
+import MapView from './MapView'
 
 const RootStack = StackNavigator(
   {
@@ -37,6 +36,9 @@ const RootStack = StackNavigator(
     },
     Register: {
       screen: RegisterPage
+    },
+    MapView: {
+      screen: MapView
     }
   },
   {

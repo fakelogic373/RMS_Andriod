@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, AsyncStorage, Alert, Image } from 'react-native';
-import { List, ListItem, Left, Body, Text, Button } from 'native-base';
+import { Container, Content, List, ListItem, Text, Separator, Button } from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import LogoImage from './logo'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -165,32 +165,29 @@ export default class MyOrderHistory extends React.Component {
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text> My Order History </Text>
                 <FlatList
+                    style={{ width: '100%' }}
                     data={this.state.orders}
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
-                        // <View style={{ flex: 1, flexDirection: 'row' }}>
-                        //     <Text> {item.OrderId} </Text>
-                        //     <Text> {item.Status} </Text>
-                        //     <Text> {item.Customer.Name} </Text>
-                        // </View>
-
                         <List>
+                            <ListItem itemDivider>
+                                <Text style={{ fontWeight: 'bold' }}>Order Number: {item.OrderId}</Text>
+                            </ListItem>
                             <ListItem>
-                                <Left>
-                                     {item.OrderId}
-                                </Left>
-                                <Body>
-                                    <Text>{item.Status}</Text>
-                                    <Text note>{item.Customer.Name}</Text>
-                                </Body>
+                                <Text>Date: {item.OrderDate}</Text>
+                            </ListItem>
+                            <ListItem>
+                                <Text>{item.OrderType}</Text>
+                            </ListItem>
+                            <ListItem>
+                                <Text>{item.Status}</Text>
                             </ListItem>
                         </List>
                     }
                 />
                 <View style={{ alignItems: 'center', paddingBottom: 10 }}>
-                    <Button rounded danger onPress={() => this.handleLogout()}>
+                    <Button rounded primary onPress={() => this.handleLogout()}>
                         <Text>logout</Text>
                     </Button>
                 </View>

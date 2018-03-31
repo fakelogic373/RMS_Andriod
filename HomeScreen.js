@@ -23,25 +23,6 @@ export default class HomeScreen extends React.Component {
         data: []
     }
 
-    // async componentWillMount() {
-    //     return await fetch('http://192.168.56.1:45457api/Meals')
-    //         .then((response) => response.json())
-    //         .then((responseJson) => {
-    //             console.log(responseJson)
-
-    //             this.setState({
-    //                 data: responseJson
-    //             }, function () {
-
-    //             });
-
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //         });
-    // }
-
-
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
