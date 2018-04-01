@@ -11,7 +11,7 @@ export default class MyOrder extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: 'Your Current Crder',
+            headerTitle: 'Your Current Order',
             headerRight: (
                 <Image
                     source={require('./images/Headers/chef.png')}
@@ -91,6 +91,7 @@ export default class MyOrder extends React.Component {
                     keyExtractor={(x, i) => i}
                     renderItem={({ item }) =>
                         <List>
+                            
                             <ListItem avatar>
                                 <Left>
                                     {item.Meal.Category.Name
