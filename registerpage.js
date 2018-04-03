@@ -82,6 +82,7 @@ export default class RegisterPage extends Component {
                                             onChangeText={(Password) => this.setState({ Password })}
                                             value={this.state.Password}
                                             selectTextOnFocus={true}
+                                            secureTextEntry={true}
                                         />
                                     </Item>
                                     <Item floatingLabel>
@@ -91,6 +92,7 @@ export default class RegisterPage extends Component {
                                             onChangeText={(ConfirmPassword) => this.setState({ ConfirmPassword })}
                                             value={this.state.ConfirmPassword}
                                             selectTextOnFocus={true}
+                                            secureTextEntry={true}
                                         />
                                     </Item>
                                 </Form>

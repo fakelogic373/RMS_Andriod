@@ -15,8 +15,8 @@ export default class StudentReg extends Component {
     };
 
     state = {
-        Username: 'admin@admin.com',
-        Password: 'Password1!'
+        Username: '', //Users Example:- Admin User: admin@admin.com  --  Customer User: khalid@customer.com  --  Chef User: aziz@chef.com  --  Driver User: noor@driver.com
+        Password: ''  //All Users Password:- Password1!
     }
 
     login = async (json, action) => {
@@ -126,6 +126,7 @@ export default class StudentReg extends Component {
                                             onChangeText={(Password) => this.setState({ Password })}
                                             value={this.state.Password}
                                             selectTextOnFocus={true}
+                                            secureTextEntry={true}
                                         />
                                     </Item>
                                 </Form>
